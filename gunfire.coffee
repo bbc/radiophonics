@@ -39,7 +39,7 @@ require(["jquery", "backbone", "knob", "switch"], ($, Backbone, Knob, Switch) ->
           
           @source.buffer = @buffer
           @source.loop = true
-          @source.noteOn 0
+          @source.start 0
       # Load the samples from the provided `url`, decode and store in
       # an instance variable.
       loadBuffer: ->
@@ -81,7 +81,7 @@ require(["jquery", "backbone", "knob", "switch"], ($, Backbone, Knob, Switch) ->
 	  # Now we create and connect the noise to the envelope generators
 	  # so that they can be triggered by the timing node
 	  # we also create 4 voices to allow shots to overlap
-    audioContext = new webkitAudioContext
+    audioContext = new AudioContext
     # Create the noise source
     noise = new Player("/audio/white_noise.wav")
     
