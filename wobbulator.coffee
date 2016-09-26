@@ -71,10 +71,10 @@ require(["jquery", "backbone", "knob", "switch"], ($, Backbone, Knob, Switch) ->
 
         # The amplitude of the modulation oscillator (its 'depth') is
         # modified by passing the output through a GainNode.
-        @modulation_gain = context.createGainNode()
+        @modulation_gain = context.createGain()
 
         # Another GainNode controls the master volume
-        @master_gain = context.createGainNode()
+        @master_gain = context.createGain()
 
         # Connect the graph as above
         @modulator.connect(@modulation_gain)
@@ -86,8 +86,8 @@ require(["jquery", "backbone", "knob", "switch"], ($, Backbone, Knob, Switch) ->
         # Once an OscillatorNode is stopped it cannot be restarted. We
         # turn both oscillators on from the beginning, and achieve the
         # on/off effect by modifying the master gain.
-        @oscillator.noteOn(0)
-        @modulator.noteOn(0)
+        @oscillator.start(0)
+        @modulator.start(0)
 
         @turned_on = true
 
@@ -119,7 +119,7 @@ require(["jquery", "backbone", "knob", "switch"], ($, Backbone, Knob, Switch) ->
         @master_gain.gain.value = 0
 
     # # Initial parameters
-    context = new webkitAudioContext
+    context = new AudioContext
     oscillator = new ModulatedOscillator(context)
 
     # Set the initial parameters of the oscillator

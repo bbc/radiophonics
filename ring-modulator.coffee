@@ -61,12 +61,12 @@ require(["jquery", "backbone", "knob", "speechbubble", "switch"], ($, Backbone, 
         # Connect the source to the node's destination
         @source.connect(@destination)
         # Play immediately
-        @source.noteOn(0)
+        @source.start(0)
 
       stop: ->
         if @source
           # Stop the source from playing
-          @source.noteOff 0
+          @source.stop(0)
           @source.disconnect
 
       # We provide a connect method so that it can
@@ -166,39 +166,39 @@ require(["jquery", "backbone", "knob", "speechbubble", "switch"], ($, Backbone, 
     # - Addition is achieved by noting that Web Audio nodes sum their inputs
     # - The diodes are implemented in the DiodeNode class
     #
-    context = new webkitAudioContext
+    context = new AudioContext
 
     # First we create the objects on the Vin side of the graph
     vIn = context.createOscillator()
     vIn.frequency.value = 30
-    vIn.noteOn(0)
-    vInGain = context.createGainNode()
+    vIn.start(0)
+    vInGain = context.createGain()
     vInGain.gain.value = 0.5
 
     # GainNodes can take negative gain which represents phase
     # inversion
-    vInInverter1 = context.createGainNode()
+    vInInverter1 = context.createGain()
     vInInverter1.gain.value = -1
 
-    vInInverter2 = context.createGainNode()
+    vInInverter2 = context.createGain()
     vInInverter2.gain.value = -1
 
     vInDiode1 = new DiodeNode(context)
     vInDiode2 = new DiodeNode(context)
 
-    vInInverter3 = context.createGainNode()
+    vInInverter3 = context.createGain()
     vInInverter3.gain.value = -1
 
     # Now we create the objects on the Vc side of the graph
     player = new SamplePlayer(context)
 
-    vcInverter1 = context.createGainNode()
+    vcInverter1 = context.createGain()
     vcInverter1.gain.value = -1
     vcDiode3 = new DiodeNode(context)
     vcDiode4 = new DiodeNode(context)
-    
+
     # A gain node to control master output levels
-    outGain = context.createGainNode()
+    outGain = context.createGain()
     outGain.gain.value = 4
 
     # A small addition to the graph given in Parker's paper is a
@@ -325,15 +325,15 @@ require(["jquery", "backbone", "knob", "speechbubble", "switch"], ($, Backbone, 
     # Rocks](http://updates.html5rocks.com/2012/09/Live-Web-Audio-Input-Enabled)
     # has the information you'll need to try this feature out.
 
-    liveInputGain = context.createGainNode()
+    liveInputGain = context.createGain()
     liveInput     = null
 
-    # There's no easy way to feature detect if this is supported so 
+    # There's no easy way to feature detect if this is supported so
     # we have to browser detect the version of Chrome
     isLiveInputSupported = ->
       isSupported = false
       browser = $.browser
-    
+
       if browser.chrome
         majorVersion = parseInt( browser.version.split('.')[0] )
         isSupported  = true if majorVersion >= 23
@@ -368,7 +368,7 @@ require(["jquery", "backbone", "knob", "speechbubble", "switch"], ($, Backbone, 
           @keys = []
 
     konami = new KonamiCode()
-    konami.onPowerup -> 
+    konami.onPowerup ->
       console.log("powerup")
       activateLiveMicButton()
 

@@ -31,7 +31,7 @@ require(["jquery", "backbone", "knob", "switch"], ($, Backbone, Knob, Switch) ->
     #
     # AudioBufferSourceNode's work in a slightly counter-intuitive way
     # for performance reasons. Once a sound has been triggered with a
-    # `noteOn` message, it cannot be re-triggered. The
+    # `start` message, it cannot be re-triggered. The
     # [FAQ](http://updates.html5rocks.com/2012/01/Web-Audio-FAQ) on
     # [HTML5 Rocks](http://www.html5rocks.com/) discusses the reasons
     # behind this. To make the sample player more natural to work with
@@ -56,12 +56,12 @@ require(["jquery", "backbone", "knob", "switch"], ($, Backbone, Knob, Switch) ->
           this.setSpeed()
 
           # Trigger the source to play immediately
-          @source.noteOn 0
+          @source.start 0
 
       stop: ->
         if @buffer && @source
           # Stop the sample playback immediately
-          @source.noteOff 0
+          @source.stop 0
 
       setBaseSpeed: (speed) ->
         @base_speed = speed
@@ -146,7 +146,7 @@ require(["jquery", "backbone", "knob", "switch"], ($, Backbone, Knob, Switch) ->
     # # Application Setup
 
     # Create an audio context for our application to exist within.
-    context = new webkitAudioContext
+    context = new AudioContext
 
     # Instantiate three separate players with the three loops.
     player1 = new Player('/audio/delia_loop_01.ogg')
