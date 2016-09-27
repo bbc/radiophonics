@@ -1,8 +1,0 @@
-* Radiophonics Workshop Web Audio API Demos
-
-This repo contains the source code for our project to [[http://webaudio.prototyping.bbc.co.uk/][recreate the
-sound of the Radiophonic Workshop using the Web Audio API]].
-
-The full experience including user interfaces is best viewed on our
-site, but this repo provides and easier way to view the source code
-of each demo.
