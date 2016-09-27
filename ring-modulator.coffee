@@ -45,7 +45,7 @@ require(["jquery", "backbone", "knob", "speechbubble", "switch"], ($, Backbone, 
     # [AudioBufferSourceNode](https://dvcs.w3.org/hg/audio/raw-file/tip/webaudio/specification.html#AudioBufferSourceNode).
     # The sample is then triggered and looped. The `SamplePlayer`
     # class encapsulates this operation.
-    class SamplePlayer extends Backbone.View
+    SamplePlayer = Backbone.View.extend({
       # Instances require the AudioContext in order to create a
       # source buffer.
       constructor: (@context) ->
@@ -95,6 +95,7 @@ require(["jquery", "backbone", "knob", "speechbubble", "switch"], ($, Backbone, 
           @context.decodeAudioData request.response, onsuccess, onerror
 
         request.send()
+    })
 
     # # DiodeNode
     #

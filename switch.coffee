@@ -2,12 +2,12 @@
 #
 # This class implements a Backbone View that can be bound to a DOM
 # element to turn it into a toggle switch.
-define(['backbone'], ->
-  class SwitchView extends Backbone.View
+define(['backbone', 'jquery'], (Backbone, $) ->
+  SwitchView = Backbone.View.extend({
     # The switch defaults to off (0).
-    initialize: () ->
+    initialize: (options) ->
       @count = 0
-      @states = @options.states || ['off', 'on']
+      @states = options.states || ['off', 'on']
       @applyState()
 
     # When the switch is `click`ed ...
@@ -27,4 +27,6 @@ define(['backbone'], ->
       @count = @count + 1
       @applyState()
       this.trigger(@currentState())
+
+  })
 )
