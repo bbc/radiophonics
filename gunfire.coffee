@@ -81,7 +81,7 @@ require(["jquery", "backbone", "knob", "switch"], ($, Backbone, Knob, Switch) ->
 	  # Now we create and connect the noise to the envelope generators
 	  # so that they can be triggered by the timing node
 	  # we also create 4 voices to allow shots to overlap
-    window.AudioContext = new (AudioContext || webkitAudioContext)
+    audioContext = new (AudioContext || webkitAudioContext)
     # Create the noise source
     noise = new Player("/audio/white_noise.wav")
 
