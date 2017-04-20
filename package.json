@@ -1,0 +1,62 @@
+{
+  "name": "radiophonics",
+  "version": "1.0.0",
+  "description": "Radiophonics Workshop Web Audio API Demos",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm run build:bundle",
+    "build:bundle": "browserify -e gunfire.coffee -o bundle.js",
+    "test": "./node_modules/karma/bin/karma start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bbc/radiophonics.git"
+  },
+  "keywords": [],
+  "author": "Chris Lowis (https://github.com/chrislo)",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/bbc/radiophonics/issues"
+  },
+  "homepage": "https://github.com/bbc/radiophonics#readme",
+  "dependencies": {
+    "backbone": "^1.3.3",
+    "coffeeify": "^2.0.1",
+    "deamdify": "github:jaredhanson/deamdify",
+    "jquery": "^1.9.1"
+  },
+  "browserify": {
+    "transform": [
+      "coffeeify",
+      [
+        "deamdify",
+        {
+          "extensions": [
+            ".js",
+            ".coffee"
+          ]
+        }
+      ]
+    ]
+  },
+  "browser": {
+    "gunfire": "./gunfire.coffee",
+    "knob": "./knob.coffee",
+    "ring-modulator": "./ring-modulator.coffee",
+    "speechbubble": "./speechbubble.coffee",
+    "switch": "./switch.coffee",
+    "tapeloops": "./tapeloops.coffee",
+    "wobbulator": "./wobbulator.coffee"
+  },
+  "devDependencies": {
+    "browserify": "^13.1.0",
+    "karma": "^1.3.0",
+    "karma-browserify": "^5.1.0",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-coffee-preprocessor": "^1.0.1",
+    "karma-firefox-launcher": "^1.0.0",
+    "karma-mocha": "^1.1.1",
+    "mocha": "^3.0.2",
+    "watchify": "^3.7.0"
+  }
+}

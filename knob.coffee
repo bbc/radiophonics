@@ -2,8 +2,8 @@
 #
 # This class implements a Backbone View which can be bound to a DOM
 # element to turn it into a rotatable, analogue knob.
-define(['backbone'], ->
-  class KnobView extends Backbone.View
+define(['backbone', 'jquery'], (Backbone, $) ->
+  KnobView = Backbone.View.extend({
     events:
       "mousedown": "mousedown"
       "dragstart": "dragstart"
@@ -94,4 +94,6 @@ define(['backbone'], ->
     # use in our calculations, so we account for that here.
     setKnobRotation: (deg) ->
       @knob.css('-webkit-transform','rotate('+(deg-90)+'deg)')
+
+  })
 )
